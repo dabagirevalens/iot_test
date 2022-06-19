@@ -1,8 +1,9 @@
-const { Schema, model} = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const contentSchema = new Schema({
     content: {
-        type: String
+        type: String,
+        required: true
     }
 }, { timestamps: true });
 

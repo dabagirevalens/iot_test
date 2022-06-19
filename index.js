@@ -9,15 +9,13 @@ const Content = require('./content.model');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 
 
 //connect to DB
 mongoose.
     connect('mongodb+srv://dabagire:s6vQIOnkigg1jbpG@testuser.3w0lr.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true })
-    .then(() => console.log('Connected to MongoDB'))
+    .then(() => console.log('Connected to MongoDB ', mongoose.connection.host))
     .catch(err => console.error('Could not connect to MongoDB:', err));
 
 
@@ -26,8 +24,6 @@ mongoose.
 app.post("/upload_content", async (req, res) => {
     try {
 
-        console.log(req.body)
-        
         const { content } = req.body
 
         const newContent = await Content.create({ content });
@@ -71,4 +67,4 @@ app.get('/', async (req, res) => {
 
 
 
-app.listen(process.env.PORT, () => console.log('Example app listening on port 3000!'));
+app.listen(3000, () => console.log('Example app listening on port 3000!'));
