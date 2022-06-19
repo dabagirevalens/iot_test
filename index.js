@@ -26,6 +26,8 @@ mongoose.
 app.post("/upload_content", async (req, res) => {
     try {
 
+        console.log(req.body)
+        
         const { content } = req.body
 
         const newContent = await Content.create({ content });
