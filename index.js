@@ -39,18 +39,19 @@ app.post("/upload_content", async (req, res) => {
 
         return res.status(200).send({
             success: true,
-            message: '👌Content uploaded successfully!'
+            message: '👌Content uploaded successfully!',
+            data: newContent
         });
     } catch (error) {
         console.log("error", error);
     }
 })
 
-app.get('/', async(req, res) =>{
+app.get('/', async (req, res) => {
     try {
         const contents = await Content.find({});
 
-        if(!contents) {
+        if (!contents) {
             return res.status(400).json({
                 success: false,
                 error: 'Could not find any content'
