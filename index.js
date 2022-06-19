@@ -25,22 +25,42 @@ app.post("/upload_content", async (req, res) => {
     try {
 
         const { content } = req.body
-        
+
         const newContent = await Content.create({ content });
 
         if (!newContent) {
-            res.status(400).send({
+            return res.status(400).send({
                 success: false,
                 error: 'Could not save content'
             });
         }
 
-        res.status(200).send({
+        return res.status(200).send({
             success: true,
             message: '👌Content uploaded successfully!'
         });
     } catch (error) {
         console.log("error", error);
+    }
+})
+
+app.get('/', async(req, res) =>{
+    try {
+        const contents = await Content.find({});
+
+        if(!contents) {
+            return res.status(400).json({
+                success: false,
+                error: 'Could not find any content'
+            })
+        }
+
+        return res.status(200).json({
+            success: true,
+            contents
+        })
+    } catch (error) {
+        console.log(error)
     }
 })
 
